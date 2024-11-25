@@ -1,0 +1,59 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "create": "Create",
+    "update": "Update", 
+    "delete": "Delete",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "backHome": "Back to Home",
+    "loading": "Loading...",
+    "close": "Close",
+    "copy": "Copy"
+  },
+  "workflow": {
+    "join": {
+      "title": "Join Workflow",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "Enter your email",
+      "codeLabel": "Access Code",
+      "codePlaceholder": "Enter access code",
+      "submitButton": "Join Workflow",
+      "accessGranted": "Access Granted",
+      "error": {
+        "invalidCode": "Invalid or expired access code",
+        "validationFailed": "Failed to validate access code"
+      }
+    },
+    "invite": {
+      "title": "Invite User to Workflow",
+      "instructions": {
+        "title": "How to Invite Users",
+        "step1": "Enter the user's email address below",
+        "step2": "Click \"Generate Code\" to create an access code",
+        "step3": "Share the following with the user:",
+        "step3a": "The access link below",
+        "step3b": "The generated access code",
+        "step4": "The user can enter their email and code at the link to join"
+      },
+      "accessLink": "Access Link",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "Enter email address",
+      "generateCode": "Generate Code",
+      "accessCode": "Access Code",
+      "codeValidity": "This code is valid for 24 hours",
+      "shareInstructions": "Share both the access link and code with the user",
+      "error": {
+        "noEmail": "Please enter an email address",
+        "generateFailed": "Failed to generate invite code",
+        "copyFailed": "Failed to copy to clipboard"
+      },
+      "success": {
+        "copied": "Copied!",
+        "linkCopied": "Link copied to clipboard!"
+      }
+    }
+  }
+}

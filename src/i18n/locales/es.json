@@ -1,0 +1,148 @@
+{
+  "common": {
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "create": "Crear",
+    "update": "Actualizar",
+    "delete": "Eliminar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "submit": "Enviar",
+    "backHome": "Volver al inicio",
+    "loading": "Cargando..."
+  },
+  "auth": {
+    "login": {
+      "title": "Bienvenido de Nuevo",
+      "subtitle": "¿Nuevo en nuestra plataforma?",
+      "registerLink": "Crear una cuenta",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "Ingresa tu correo electrónico",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Ingresa tu contraseña",
+      "rememberMe": "Recordarme",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "submit": "Iniciar Sesión",
+      "error": "Correo electrónico o contraseña inválidos"
+    },
+    "register": {
+      "title": "Crear Cuenta",
+      "subtitle": "¿Ya tienes una cuenta?",
+      "loginLink": "Iniciar sesión",
+      "fullName": "Nombre completo",
+      "fullNamePlaceholder": "Ingresa tu nombre completo",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "Ingresa tu correo electrónico",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Ingresa tu contraseña",
+      "confirmPassword": "Confirmar Contraseña",
+      "confirmPasswordPlaceholder": "Vuelve a ingresar tu contraseña",
+      "emailVerification": "Enviaremos un código de verificación a este correo",
+      "submit": "Crear Cuenta"
+    }
+  },
+  "workflow": {
+    "title": "Flujos de Trabajo",
+    "createNew": "Crear Nuevo Flujo",
+    "noWorkflows": "No hay flujos de trabajo",
+    "createFirst": "Crea tu primer flujo de trabajo",
+    "shareAndInvite": "Compartir e Invitar",
+    "saveAsTemplate": "Guardar como Plantilla",
+    "messages": "Mensajes",
+    "types": {
+      "sales": "Equipo de Ventas",
+      "client": "Cliente",
+      "employee": "Empleado",
+      "custom": "Personalizado"
+    },
+    "steps": {
+      "total": "pasos",
+      "addStep": "Agregar Paso",
+      "editStep": "Editar",
+      "deleteStep": "Eliminar",
+      "noSteps": "No hay pasos agregados",
+      "dueIn": "Vence en",
+      "days": "días",
+      "type": "Tipo",
+      "deleteConfirm": "¿Estás seguro de que deseas eliminar este paso?"
+    },
+    "form": {
+      "title": "Título del Flujo",
+      "titlePlaceholder": "Ingresa el título del flujo",
+      "description": "Descripción",
+      "descriptionPlaceholder": "Ingresa la descripción del flujo",
+      "type": "Tipo de Flujo",
+      "create": "Crear Flujo"
+    },
+    "templates": {
+      "title": "Plantillas",
+      "selectTitle": "Seleccionar Plantilla",
+      "optional": "o comenzar desde cero",
+      "steps": "pasos",
+      "days": "días",
+      "saveTitle": "Guardar como Plantilla",
+      "namePlaceholder": "Nombre de la plantilla",
+      "descriptionPlaceholder": "Descripción de la plantilla"
+    },
+    "invite": {
+      "title": "Invitar Usuarios",
+      "shareableLink": "Enlace Compartible",
+      "copy": "Copiar Enlace",
+      "copied": "¡Enlace copiado al portapapeles!",
+      "copyError": "Error al copiar enlace",
+      "or": "o",
+      "emailInvites": "Invitar por Correo",
+      "emailPlaceholder": "Ingresa dirección de correo",
+      "add": "Agregar",
+      "sendInvites": "Enviar Invitaciones",
+      "sending": "Enviando..."
+    }
+  },
+  "tasks": {
+    "title": "Tareas",
+    "noTasks": "No hay tareas pendientes",
+    "tasksWillAppear": "Las tareas aparecerán aquí cuando sean asignadas",
+    "status": {
+      "pending": "Pendiente",
+      "in-progress": "En Progreso",
+      "completed": "Completado"
+    },
+    "actions": {
+      "markComplete": "Marcar como Completado",
+      "askQuestion": "Hacer Pregunta"
+    }
+  },
+  "messages": {
+    "title": "Mensajes",
+    "noMessages": "No hay mensajes",
+    "placeholder": "Escribe tu mensaje",
+    "attach": "Adjuntar archivos"
+  },
+  "analytics": {
+    "title": "Panel de Análisis",
+    "totalUsers": "Total de Usuarios",
+    "completedTasks": "Tareas Completadas",
+    "avgCompletionTime": "Tiempo Promedio",
+    "completionRate": "Tasa de Finalización",
+    "progressOverTime": "Progreso en el Tiempo",
+    "recentCompletions": "Completados Recientes",
+    "table": {
+      "user": "Usuario",
+      "task": "Tarea",
+      "completedAt": "Completado el",
+      "timeSpent": "Tiempo Usado"
+    },
+    "noData": "No hay datos disponibles",
+    "minutes": "min",
+    "days": "días"
+  },
+  "admin": {
+    "title": "Administración",
+    "dashboard": "Panel de Control",
+    "workflows": "Flujos de Trabajo",
+    "users": "Usuarios",
+    "analytics": "Análisis",
+    "settings": "Configuración",
+    "logout": "Cerrar Sesión"
+  }
+}

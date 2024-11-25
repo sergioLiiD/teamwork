@@ -1,0 +1,115 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  USER
+}
+
+model User {
+  id              String           @id @default(cuid())
+  email           String           @unique
+  password        String
+  fullName        String
+  phone           String?
+  role            Role             @default(USER)
+  isPhoneVerified Boolean          @default(false)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  workspaces      WorkspaceMember[]
+  workflows       WorkflowAccess[]
+  messages        Message[]
+}
+
+model Workspace {
+  id        String           @id @default(cuid())
+  name      String
+  ownerId   String
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  members   WorkspaceMember[]
+  workflows Workflow[]
+}
+
+model WorkspaceMember {
+  id          String    @id @default(cuid())
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspaceId String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  role        String    @default("member")
+  addedAt     DateTime  @default(now())
+
+  @@unique([workspaceId, userId])
+}
+
+model Workflow {
+  id          String           @id @default(cuid())
+  title       String
+  description String?
+  type        String
+  status      String          @default("draft")
+  workspace   Workspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspaceId String
+  steps       WorkflowStep[]
+  access      WorkflowAccess[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model WorkflowStep {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  type        String
+  content     String
+  dueInDays   Int       @default(7)
+  order       Int
+  status      String    @default("pending")
+  workflow    Workflow  @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  workflowId  String
+  messages    Message[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model WorkflowAccess {
+  id         String   @id @default(cuid())
+  workflow   Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  workflowId String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  role       String   @default("participant")
+  status     String   @default("pending")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([workflowId, userId])
+}
+
+model Message {
+  id        String       @id @default(cuid())
+  content   String
+  step      WorkflowStep @relation(fields: [stepId], references: [id], onDelete: Cascade)
+  stepId    String
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  createdAt DateTime     @default(now())
+}
+
+model Invite {
+  id         String   @id @default(cuid())
+  email      String
+  token      String   @unique
+  workflowId String
+  status     String   @default("pending")
+  createdAt  DateTime @default(now())
+  expiresAt  DateTime
+}

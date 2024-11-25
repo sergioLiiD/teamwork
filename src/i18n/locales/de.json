@@ -1,0 +1,44 @@
+{
+  "common": {
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "create": "Erstellen",
+    "update": "Aktualisieren",
+    "delete": "Löschen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "submit": "Absenden",
+    "backHome": "Zurück zur Startseite",
+    "loading": "Lädt..."
+  },
+  "auth": {
+    "login": {
+      "title": "Willkommen zurück",
+      "subtitle": "Neu auf unserer Plattform?",
+      "registerLink": "Konto erstellen",
+      "email": "E-Mail",
+      "emailPlaceholder": "Geben Sie Ihre E-Mail ein",
+      "password": "Passwort",
+      "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
+      "rememberMe": "Angemeldet bleiben",
+      "forgotPassword": "Passwort vergessen?",
+      "submit": "Anmelden",
+      "error": "Ungültige E-Mail oder Passwort"
+    },
+    "register": {
+      "title": "Konto Erstellen",
+      "subtitle": "Haben Sie bereits ein Konto?",
+      "loginLink": "Anmelden",
+      "fullName": "Vollständiger Name",
+      "fullNamePlaceholder": "Geben Sie Ihren vollständigen Namen ein",
+      "email": "E-Mail",
+      "emailPlaceholder": "Geben Sie Ihre E-Mail ein",
+      "password": "Passwort",
+      "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
+      "confirmPassword": "Passwort Bestätigen",
+      "confirmPasswordPlaceholder": "Geben Sie Ihr Passwort erneut ein",
+      "emailVerification": "Wir senden einen Bestätigungscode an diese E-Mail",
+      "submit": "Konto Erstellen"
+    }
+  }
+}
