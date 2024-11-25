@@ -29,16 +29,21 @@ export const initDatabase = async () => {
     const schema = fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf8');
     await db.exec(schema);
   }
-  
   return db;
 };
 
-export const getDatabase = () => {
+// Initialize database
+initDatabase().catch(console.error);
+
+// Export the database instance
+export const getDb = () => {
   if (!db) {
     throw new Error('Database not initialized');
   }
   return db;
 };
+
+export const db = getDb();
 
 // Handle process termination
 process.on('SIGTERM', async () => {
