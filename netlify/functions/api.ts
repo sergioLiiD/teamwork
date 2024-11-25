@@ -51,7 +51,7 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 db.prepare('PRAGMA foreign_keys = ON').run();
 
 // Create serverless handler
-const handler = serverless(app);
+const serverlessHandler = serverless(app);
 
 export const handler: Handler = async (event, context) => {
   // Add the path to the event if it's not present
@@ -61,5 +61,5 @@ export const handler: Handler = async (event, context) => {
   }
 
   // Handle the request
-  return handler(event, context);
+  return serverlessHandler(event, context);
 };
