@@ -12,7 +12,10 @@ let db: any;
 export const initDatabase = async () => {
   if (!db) {
     // Ensure the database directory exists
-    const dbDir = path.join(__dirname, '../../data');
+    const dbDir = process.env.NODE_ENV === 'production'
+      ? '/tmp'  // Use /tmp in production (Netlify)
+      : path.join(__dirname, '../../data');
+      
     if (!fs.existsSync(dbDir)) {
       fs.mkdirSync(dbDir, { recursive: true });
     }
