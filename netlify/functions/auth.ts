@@ -1,4 +1,4 @@
-import { Handler } from '@netlify/functions';
+import { Handler, HandlerContext } from '@netlify/functions';
 import { getStore } from '@netlify/blobs';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
@@ -24,7 +24,7 @@ export function generateToken(user: User): string {
   return jwt.sign(user, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 }
 
-export const handler: Handler = async (event, context) => {
+export const handler: Handler = async (event: any, context: HandlerContext) => {
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
@@ -32,17 +32,17 @@ export const handler: Handler = async (event, context) => {
     };
   }
 
+  let { email, password } = JSON.parse(event.body || '{}');
+
+  if (!email || !password) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: 'Email and password are required' })
+    };
+  }
+
   try {
-    const { email, password } = JSON.parse(event.body || '{}');
-
-    if (!email || !password) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ message: 'Email and password are required' })
-      };
-    }
-
-    // Initialize the store with context
+    // Initialize the store using environment variables
     const store = getStore({
       name: 'users',
       siteID: process.env.SITE_ID,
@@ -66,10 +66,11 @@ export const handler: Handler = async (event, context) => {
         body: JSON.stringify({ 
           message: 'Invalid credentials',
           error: error instanceof Error ? error.message : String(error),
-          context: {
-            siteId: context.site.id,
-            hasIdentityToken: !!context.clientContext?.identity?.token,
-            clientContext: context.clientContext
+          debug: {
+            hasEnvVars: {
+              siteId: !!process.env.SITE_ID,
+              token: !!process.env.NETLIFY_BLOBS_TOKEN
+            }
           }
         })
       };
@@ -117,10 +118,11 @@ export const handler: Handler = async (event, context) => {
       body: JSON.stringify({ 
         message: 'Internal server error',
         error: error instanceof Error ? error.message : String(error),
-        context: {
-          siteId: context.site.id,
-          hasIdentityToken: !!context.clientContext?.identity?.token,
-          clientContext: context.clientContext
+        debug: {
+          hasEnvVars: {
+            siteId: !!process.env.SITE_ID,
+            token: !!process.env.NETLIFY_BLOBS_TOKEN
+          }
         }
       })
     };

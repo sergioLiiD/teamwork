@@ -1,9 +1,9 @@
-import { Handler } from '@netlify/functions';
+import { Handler, HandlerContext } from '@netlify/functions';
 import { getStore } from '@netlify/blobs';
 import bcrypt from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
 
-export const handler: Handler = async (event, context) => {
+export const handler: Handler = async (event: any, context: HandlerContext) => {
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
@@ -12,7 +12,7 @@ export const handler: Handler = async (event, context) => {
   }
 
   try {
-    // Initialize the store with context
+    // Initialize the store using environment variables
     const store = getStore({
       name: 'users',
       siteID: process.env.SITE_ID,
@@ -69,9 +69,9 @@ export const handler: Handler = async (event, context) => {
           message: 'Error creating admin user',
           error: error instanceof Error ? error.message : String(error),
           context: {
-            siteId: context.site.id,
-            hasIdentityToken: !!context.clientContext?.identity?.token,
-            clientContext: context.clientContext
+            siteId: process.env.SITE_ID,
+            hasIdentityToken: false,
+            clientContext: null
           }
         })
       };
@@ -84,9 +84,9 @@ export const handler: Handler = async (event, context) => {
         message: 'Error creating admin user',
         error: error instanceof Error ? error.message : String(error),
         context: {
-          siteId: context.site.id,
-          hasIdentityToken: !!context.clientContext?.identity?.token,
-          clientContext: context.clientContext
+          siteId: process.env.SITE_ID,
+          hasIdentityToken: false,
+          clientContext: null
         }
       })
     };
