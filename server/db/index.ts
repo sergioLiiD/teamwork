@@ -7,10 +7,10 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-let db: any;
+let dbInstance: any;
 
 export const initDatabase = async () => {
-  if (!db) {
+  if (!dbInstance) {
     // Ensure the database directory exists
     const dbDir = process.env.NODE_ENV === 'production'
       ? '/tmp'  // Use /tmp in production (Netlify)
@@ -20,19 +20,19 @@ export const initDatabase = async () => {
       fs.mkdirSync(dbDir, { recursive: true });
     }
 
-    db = await open({
+    dbInstance = await open({
       filename: path.join(dbDir, 'database.sqlite'),
       driver: sqlite3.Database
     });
 
     // Enable foreign keys
-    await db.run('PRAGMA foreign_keys = ON');
+    await dbInstance.run('PRAGMA foreign_keys = ON');
 
     // Create tables if they don't exist
     const schema = fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf8');
-    await db.exec(schema);
+    await dbInstance.exec(schema);
   }
-  return db;
+  return dbInstance;
 };
 
 // Initialize database
@@ -40,18 +40,18 @@ initDatabase().catch(console.error);
 
 // Export the database instance
 export const getDb = () => {
-  if (!db) {
+  if (!dbInstance) {
     throw new Error('Database not initialized');
   }
-  return db;
+  return dbInstance;
 };
 
 export const db = getDb();
 
 // Handle process termination
 process.on('SIGTERM', async () => {
-  if (db) {
-    await db.close();
+  if (dbInstance) {
+    await dbInstance.close();
   }
   process.exit(0);
 });
