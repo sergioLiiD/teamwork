@@ -48,7 +48,14 @@ export const handler: Handler = async (event, context) => {
       siteID: process.env.SITE_ID,
       token: process.env.NETLIFY_BLOBS_TOKEN
     });
-    
+
+    // Log initialization details for debugging
+    console.log('Store initialization:', {
+      name: 'users',
+      siteID: process.env.SITE_ID,
+      hasToken: !!process.env.NETLIFY_BLOBS_TOKEN
+    });
+
     let userData;
     try {
       userData = await store.get(email);
