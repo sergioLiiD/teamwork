@@ -25,23 +25,12 @@ export default defineConfig(({ mode }) => {
         },
         output: {
           format: 'es',
-          generatedCode: {
-            preset: 'es2015',
-            constBindings: true
-          },
           entryFileNames: 'assets/[name].[hash].js',
           chunkFileNames: 'assets/[name].[hash].js',
           assetFileNames: 'assets/[name].[hash].[ext]',
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              if (id.includes('react/') || id.includes('react-dom/') || id.includes('react-router-dom')) {
-                return 'react-vendor';
-              }
-              if (id.includes('zustand') || id.includes('i18next') || id.includes('chart.js')) {
-                return 'app-vendor';
-              }
-              return 'vendor';
-            }
+          manualChunks: {
+            'react': ['react', 'react-dom', 'react-router-dom'],
+            'vendor': ['zustand', 'i18next', 'react-i18next', 'chart.js', 'react-chartjs-2'],
           }
         },
       },
@@ -58,8 +47,11 @@ export default defineConfig(({ mode }) => {
         'react-router-dom',
         'zustand',
         'i18next',
-        'chart.js'
-      ]
+        'react-i18next',
+        'chart.js',
+        'react-chartjs-2'
+      ],
+      force: true
     },
     server: {
       port: 3000,

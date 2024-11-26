@@ -47,6 +47,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.25.9",
     "@hookform/resolvers": "^3.3.4",
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.17",
