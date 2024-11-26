@@ -42,6 +42,25 @@ export const handler: Handler = async (event: any, context: HandlerContext) => {
   }
 
   try {
+    // Check required environment variables
+    if (!process.env.SITE_ID || !process.env.NETLIFY_BLOBS_TOKEN) {
+      console.error('Missing required environment variables:', {
+        hasSiteId: !!process.env.SITE_ID,
+        hasToken: !!process.env.NETLIFY_BLOBS_TOKEN
+      });
+      return {
+        statusCode: 500,
+        body: JSON.stringify({
+          message: 'Server configuration error',
+          error: 'Missing required environment variables',
+          debug: {
+            hasSiteId: !!process.env.SITE_ID,
+            hasToken: !!process.env.NETLIFY_BLOBS_TOKEN
+          }
+        })
+      };
+    }
+
     // Initialize the store using environment variables
     const store = getStore({
       name: 'users',
@@ -52,8 +71,9 @@ export const handler: Handler = async (event: any, context: HandlerContext) => {
     // Log initialization details for debugging
     console.log('Store initialization:', {
       name: 'users',
-      siteID: process.env.SITE_ID,
-      hasToken: !!process.env.NETLIFY_BLOBS_TOKEN
+      hasSiteId: !!process.env.SITE_ID,
+      hasToken: !!process.env.NETLIFY_BLOBS_TOKEN,
+      siteId: process.env.SITE_ID
     });
 
     let userData;
