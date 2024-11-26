@@ -15,7 +15,7 @@ export const handler: Handler = async (event, context) => {
     // Initialize the store with context
     const store = getStore({
       name: 'users',
-      siteID: context.site.id || process.env.SITE_ID,
+      siteID: process.env.SITE_ID,
       token: process.env.NETLIFY_BLOBS_TOKEN
     });
     
