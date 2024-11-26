@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from '../../lib/validation';
 import { useAuthStore } from '../../store/authStore';
 import LanguageSelector from '../../components/LanguageSelector';
+import { login as loginService } from '../../services/auth';
 
 type LoginForm = {
   email: string;
@@ -34,20 +35,7 @@ const Login: React.FC = () => {
       setIsSubmitting(true);
       setError('');
 
-      const response = await fetch('/.netlify/functions/auth', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Login failed');
-      }
-
-      const { token, user } = await response.json();
+      const { token, user } = await loginService(data);
       
       // Update auth store with user and token
       login(user, token);
