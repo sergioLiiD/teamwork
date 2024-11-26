@@ -32,10 +32,13 @@ const Login: React.FC = () => {
 
   const onSubmit = async (data: LoginForm) => {
     try {
+      console.log('Submitting login form:', { email: data.email });
       setIsSubmitting(true);
       setError('');
 
+      console.log('Making request to auth service...');
       const { token, user } = await loginService(data);
+      console.log('Login successful:', { user });
       
       // Update auth store with user and token
       login(user, token);
@@ -47,6 +50,7 @@ const Login: React.FC = () => {
         navigate('/dashboard');
       }
     } catch (err) {
+      console.error('Login error:', err);
       setError(err instanceof Error ? err.message : 'auth.login.error');
     } finally {
       setIsSubmitting(false);
