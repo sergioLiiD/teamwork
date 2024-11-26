@@ -10,23 +10,32 @@ export default defineConfig(({ mode }) => {
     base: '/',
     build: {
       outDir: 'dist',
-      sourcemap: false,
+      sourcemap: mode === 'development',
       minify: 'terser',
       terserOptions: {
         compress: {
-          drop_console: true,
-          drop_debugger: true,
+          drop_console: mode === 'production',
+          drop_debugger: mode === 'production',
         },
       },
       rollupOptions: {
         output: {
           format: 'es',
           generatedCode: {
-            preset: 'es2015'
+            preset: 'es2015',
+            constBindings: true
           },
-          entryFileNames: 'assets/[name]-[hash].js',
-          chunkFileNames: 'assets/[name]-[hash].js',
-          assetFileNames: 'assets/[name]-[hash].[ext]',
+          entryFileNames: 'assets/[name].[hash].js',
+          chunkFileNames: 'assets/[name].[hash].js',
+          assetFileNames: 'assets/[name].[hash].[ext]',
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              if (id.includes('react')) {
+                return 'react-vendor';
+              }
+              return 'vendor';
+            }
+          }
         },
       },
     },
@@ -36,8 +45,14 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
-      port: 5173,
+      port: 3000,
+      strictPort: true,
       host: true,
     },
+    preview: {
+      port: 3000,
+      strictPort: true,
+      host: true,
+    }
   };
 });
