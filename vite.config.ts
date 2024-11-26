@@ -34,8 +34,11 @@ export default defineConfig(({ mode }) => {
           assetFileNames: 'assets/[name].[hash].[ext]',
           manualChunks(id) {
             if (id.includes('node_modules')) {
-              if (id.includes('react')) {
+              if (id.includes('react/') || id.includes('react-dom/') || id.includes('react-router-dom')) {
                 return 'react-vendor';
+              }
+              if (id.includes('zustand') || id.includes('i18next') || id.includes('chart.js')) {
+                return 'app-vendor';
               }
               return 'vendor';
             }
@@ -47,6 +50,16 @@ export default defineConfig(({ mode }) => {
       alias: {
         '@': resolve(__dirname, 'src'),
       },
+    },
+    optimizeDeps: {
+      include: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+        'zustand',
+        'i18next',
+        'chart.js'
+      ]
     },
     server: {
       port: 3000,
