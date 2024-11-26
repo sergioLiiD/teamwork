@@ -10,6 +10,7 @@ export default defineConfig(({ mode }) => {
     base: '/',
     build: {
       outDir: 'dist',
+      assetsDir: 'assets',
       sourcemap: mode === 'development',
       minify: 'terser',
       terserOptions: {
@@ -19,6 +20,9 @@ export default defineConfig(({ mode }) => {
         },
       },
       rollupOptions: {
+        input: {
+          main: resolve(__dirname, 'index.html'),
+        },
         output: {
           format: 'es',
           generatedCode: {
@@ -41,7 +45,7 @@ export default defineConfig(({ mode }) => {
     },
     resolve: {
       alias: {
-        '@': resolve(__dirname, './src'),
+        '@': resolve(__dirname, 'src'),
       },
     },
     server: {
